@@ -34,6 +34,14 @@ func run() error {
 
 	defer config.CloseDB()
 
+	err = config.ConnectRedis()
+
+	if err != nil {
+		return err
+	}
+
+	// defer config.CloseRedisDB()
+
 	app := fiber.New()
 
 	app.Use(logger.New())
